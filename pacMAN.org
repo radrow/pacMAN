@@ -115,7 +115,7 @@ Query *local* db
 
 ~-kk~ – aa. but also with their properties
 
-~-l~– list files owned by package
+~-l~ – list files owned by package
 
 ~-m~ – restrict to packages not present in repo
 
