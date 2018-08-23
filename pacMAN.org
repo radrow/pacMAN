@@ -1,0 +1,242 @@
+#+TITLE: PACMAN CHEATSHEET
+
+#+BEGIN_COMMENT
+`#+` things like over here are markdown directives, ignore them if you see them
+#+END_COMMENT
+
+* Configuration must-have
+
+Add (or uncomment) to your `/etc/pacman.conf`:
+
+#+BEGIN_SRC
+# For nice colors
+Color
+
+# For less boring loading bar
+ILoveCandy
+
+# Display progress bar for whole process, not all packages separately
+TotalDownload
+
+# Enable 32 bit packages (ofc it will use 64 bit by default)
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+#+END_SRC
+
+* Usage
+
+`-` options can be combined, eg. `pacman -R -s -s` equals `pacman -Rss`
+
+** -S
+
+Sync, synchronize with repo and query *remote* db
+
+`-S` – install/upgrade `x`
+
+`-y` – update package index
+
+`-yy` – force update package index
+
+`-u` – update all
+
+`-uu` – update all, allow downgrading
+
+`-c` – remove packages cache for not installed packages (they may take a lot of disk space)
+
+`-cc` – remove packages cache (not recommended right after system upadate)
+
+`-i` – display more info
+
+`-ii` – display even more info
+
+`-s <regexp>` – search using regexp
+
+`-w` – just download to cache, do not install
+
+`-d` – skip dependency version checks
+
+`-dd` – skip dependency checks
+
+`--dbonly` – execute only in the db, no actual files will be altered
+
+`--ignore` – ignore package
+
+`--asdeps` – install as dependencies
+
+`--asexplicit` – install as explicit (may be used to prevent unwanted removal via `-Rs`)
+
+** -U
+
+Install from `tar.xz` file
+
+`-d` – skip dependency version checks
+
+`-dd` – skip dependency checks
+
+`--dbonly` – execute only in the db, no actual files will be altered
+
+`--ignore` – ignore package
+
+`--asdeps` – install as dependencies
+
+`--asexplicit` – install as explicit (may be used to prevent unwanted removal via `-Rs`)
+
+** -R
+
+Remove packages
+
+`-c` – remove also all that depend on given package
+
+`-s` – remove also all depenencies of package, that are not required anymore nor explicitly installed
+
+`-ss` – remove also all depenencies of package, that are not required anymore
+
+`-u` – remove targets that are not required by other packages (useful for groups)
+
+`-d` – skip dependency version checks
+
+`-dd` – skip dependency checks
+
+`--dbonly` – execute only in the db, no actual files will be altered
+
+** -Q
+
+Query *local* db
+
+`-d` – only dependencies (not installed explicitly)
+
+`-e` – only explicitly installed
+
+`-i` – display more info
+
+`-ii` – display even more info
+
+`-k` – check if files are present in filesystem
+
+`-kk` – aa. but also with their properties
+
+`-l`– list files owned by package
+
+`-m` – restrict to packages not present in repo
+
+`-n` – restrict to packages present in repo
+
+`-o <file>` – find packages that own given files
+
+`-p <file>` – query given file, not entry in the db
+
+`-s <regexp>` – search using regexp
+
+`-t` – not required nor optionally required by any package
+
+`-tt` – aa. but allow optionally required
+
+`-u` – list packages out-of-date (requires -Sy before)
+
+** -F
+
+Search for files in the *repo*
+
+`-y` – update files db, similar to `-S`
+
+`-l` – list files of package
+
+`-s` – search for file
+
+`-x` – use regexp in `-s`
+
+`-o` – search for packages that own file
+
+
+
+* Most useful examples
+
+** Install emacs
+
+`pacman -S emacs`
+
+** Upgrade emacs
+
+`pacman -Sy emacs`
+
+** Install Xorg from `xorg17` repo
+
+`pacman -S xorg17/xorg-server`
+
+** `apt-get update`, update repos' informations
+
+`pacman -Sy`
+
+** Update system
+
+`pacman -Syu`
+
+** Remove vim
+
+`pacman -Rs vim`
+
+** Remove gnome (which made dependency hell as always)
+
+`pacman -Rsc gnome-shell`
+
+** Remove all unneeded dependencies
+
+Use with brain
+`pacman -Rs $(pacman -Qqtd)`
+
+After that try
+`pacman -Qtd`
+to check whether these depene
+
+** Just fucking remove `linux`, I don't care if it will break something
+
+`pacman -Rdd linux`
+
+** Downgrade `emacs` to `25.3-3` 
+
+If you have it cached:
+`pacman -U /var/cache/pacman/pkg/emacs-25.3-3-x86_64.pkg.tar.xz`
+
+If not:
+` pacman -U https://archive.archlinux.org/packages/e/emacs/emacs-25.3-3-x86_64.pkg.tar.xz`
+
+** What are executables of `vi`?
+
+`pacman -Qql vi | grep '^\S*x\S*'`
+
+** Which package will provide me `netstat`? (No, not `netstat`)
+
+`pacman -Fs netstat`
+
+** Where can I find history of my actions?
+
+`/var/log/pacman.log`
+
+* Troubleshooting
+
+** Installing python but "/usr/bin/python exists in filesystem"
+
+Check if any package owns this file
+
+`pacman -Qo /usr/bin/python`
+
+If yes it is likely to be a bug. You may force install it by
+
+`pacman -S --overwrite /usr/bin/python python`
+
+If there are so many files and you are in rage you may do
+
+`pacman -S python --force`
+
+But it may break your system if used unlucky, as it is so deprecated that it is not even mentioned in man
+
+** "Failed to init transaction (unable to lock database)"
+
+Ensure that you are not trying to run two pacmans at once (you can't). 
+If you are sure (eg. your pc got down during package installation) this will help
+
+`rm /var/lib/pacman/db.lck`
+
+** "Blah blah blah keyring, key, signature, blah"
+
+`pacman -Sy archlinux-keyring && pacman-key --refresh-keys`
