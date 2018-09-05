@@ -94,6 +94,8 @@ Remove packages
 
 ~-u~ – remove targets that are not required by other packages (useful for groups)
 
+~-n~ – remove also configuration files (like ~purge~ in ~apt~)
+
 ~-d~ – skip dependency version checks
 
 ~-dd~ – skip dependency checks
