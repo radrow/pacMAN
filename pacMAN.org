@@ -15,7 +15,8 @@ Color
 # For less boring loading bar
 ILoveCandy
 
-# Display progress bar for whole process, not all packages separately
+# Display ETA, size and % for whole process, not all packages separately
+# The progress bar will still be based on separate packages
 TotalDownload
 
 # Enable 32 bit packages (ofc it will use 64 bit by default)
