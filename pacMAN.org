@@ -207,6 +207,10 @@ If not:
 
 ~pacman -Qql vi | grep '^\S*x\S*'~
 
+** Which package has created file ~/usr/bin/fuck~ (spoiler: ~community/thefuck~)
+
+~pacman -Qo fuck~
+
 ** Which package will provide me ~netstat~? (No, not ~netstat~)
 
 ~pacman -Fs netstat~
