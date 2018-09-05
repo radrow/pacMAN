@@ -217,6 +217,12 @@ If not:
 
 * Troubleshooting
 
+** 404 Error but I have internet connection
+
+Update your database:
+
+~pacman -Syy~
+
 ** Installing python but "/usr/bin/python exists in filesystem"
 
 Check if any package owns this file
