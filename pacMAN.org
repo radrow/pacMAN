@@ -252,4 +252,4 @@ If you are sure (eg. your pc got down during package installation) this will hel
 
 ** "Blah blah blah keyring, key, signature, blah"
 
-~pacman -Sy archlinux-keyring && pacman-key --refresh-keys~
+~pacman -Sy archlinux-keyring; pacman-key --refresh-keys; pacman-key --populate archlinux~
