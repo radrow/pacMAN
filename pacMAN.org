@@ -189,7 +189,7 @@ Use with brain
 
 After that try
 ~pacman -Qtd~
-to check whether these depene
+to check whether orphans still persist 
 
 ** Just fucking remove ~linux~, I don't care if it will break something
 
@@ -201,7 +201,7 @@ If you have it cached:
 ~pacman -U /var/cache/pacman/pkg/emacs-25.3-3-x86_64.pkg.tar.xz~
 
 If not:
-~ pacman -U https://archive.archlinux.org/packages/e/emacs/emacs-25.3-3-x86_64.pkg.tar.xz~
+~pacman -U https://archive.archlinux.org/packages/e/emacs/emacs-25.3-3-x86_64.pkg.tar.xz~
 
 ** What are executables of ~vi~?
 
