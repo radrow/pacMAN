@@ -15,7 +15,7 @@ Color
 # For less boring loading bar
 ILoveCandy
 
-# Display ETA, size and % for whole process, not all packages separately
+# Display ETA, size and % for whole process, instead of each package separately
 # The progress bar will still be based on separate packages
 TotalDownload
 
