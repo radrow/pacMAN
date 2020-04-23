@@ -1,7 +1,7 @@
 #+TITLE: PACMAN CHEATSHEET
 
 #+BEGIN_COMMENT
-~#+~ things like over here are markdown directives, ignore them if you see them
+~#+~ things like this over here are just the markdown directives, ignore them if you see them in your preview
 #+END_COMMENT
 
 * Configuration must-have
@@ -15,22 +15,22 @@ Color
 # For less boring loading bar
 ILoveCandy
 
-# Display ETA, size and % for whole process, instead of each package separately
-# The progress bar will still be based on separate packages
+# Display ETA, size and progress % for the whole process, instead of each package separately
+# The progress bar will still be calculated independently for every package
 TotalDownload
 
-# Enable 32 bit packages (ofc it will use 64 bit by default)
+# Enable 32 bit packages (it won't cause any compatibility issues, don't worry)
 [multilib]
 Include = /etc/pacman.d/mirrorlist
 #+END_SRC
 
 * Usage
 
-~-~ options can be combined, eg. ~pacman -R -s -s~ equals ~pacman -Rss~
+~-~ options can be combined together, eg. ~pacman -R -s -s~ equals ~pacman -Rss~
 
 ** -S
 
-Sync, synchronize with repo and query *remote* db
+Sync, synchronize with repo and query the *remote* db
 
 ~-S~ – install/upgrade ~x~
 
@@ -42,7 +42,7 @@ Sync, synchronize with repo and query *remote* db
 
 ~-uu~ – update all, allow downgrading
 
-~-c~ – remove packages cache for not installed packages (they may take a lot of disk space)
+~-c~ – remove packages cache for not installed packages (they may waste a lot of disk space)
 
 ~-cc~ – remove packages cache (not recommended right after system upadate)
 
@@ -86,7 +86,7 @@ Install from ~tar.xz~ file
 
 Remove packages
 
-~-c~ – remove also all that depend on given package
+~-c~ – remove also all packages that depend on the given package
 
 ~-s~ – remove also all depenencies of package, that are not required anymore nor explicitly installed
 
@@ -114,7 +114,7 @@ Query *local* db
 
 ~-ii~ – display even more info
 
-~-k~ – check if files are present in filesystem
+~-k~ – check if the files are present in filesystem
 
 ~-kk~ – aa. but also with their properties
 
@@ -140,13 +140,11 @@ Query *local* db
 
 Search for files in the *repo*
 
-~-y~ – update files db, similar to ~-S~
+~-y~ – update the files db, works similar as in ~-S~
 
-~-l~ – list files of package
+~-l~ – list the files of package
 
-~-s~ – search for file
-
-~-x~ – use regexp in ~-s~
+~-x~ – use regexp in search
 
 ~-o~ – search for packages that own file
 
@@ -166,11 +164,11 @@ Search for files in the *repo*
 
 ~pacman -S xorg17/xorg-server~
 
-** ~apt-get update~, update repos' informations
+** ~apt-get update~, update information about repos
 
 ~pacman -Sy~
 
-** Update system
+** Update the system
 
 ~pacman -Syu~
 
@@ -207,13 +205,13 @@ If not:
 
 ~pacman -Qql vi | grep '^\S*x\S*'~
 
-** Which package has created file ~/usr/bin/fuck~ (spoiler: ~community/thefuck~)
+** Which package has created the file ~/usr/bin/fuck~ (spoiler: ~community/thefuck~)
 
 ~pacman -Qo fuck~
 
 ** Which package will provide me ~netstat~? (No, not ~netstat~)
 
-~pacman -Fs netstat~
+~pacman -F netstat~
 
 ** Where can I find history of my actions?
 
@@ -229,19 +227,19 @@ Update your database:
 
 ** Installing python but "/usr/bin/python exists in filesystem"
 
-Check if any package owns this file
+Check if there is a package that owns this file
 
 ~pacman -Qo /usr/bin/python~
 
-If yes it is likely to be a bug. You may force install it by
+If yes, then it is probably a bug. You may force install it by
 
 ~pacman -S --overwrite /usr/bin/python python~
 
-If there are so many files and you are in rage you may do
+If there are too many files and you are already in rage, then you may do
 
 ~pacman -S python --force~
 
-But it may break your system if used unlucky, as it is so deprecated that it is not even mentioned in man
+But it may break your system if used unlucky, as it is so deprecated that it is not even mentioned in the man
 
 ** "Failed to init transaction (unable to lock database)"
 
