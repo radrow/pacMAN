@@ -203,7 +203,7 @@ If not:
 
 ** What are executables of ~vi~?
 
-~pacman -Qql vi | grep '^\S*x\S*'~
+~for ARG in $(pacman -Qql vi); do [ ! -d $ARG ] && [ -x $ARG ] && echo $ARG; done~
 
 ** Which package has created the file ~/usr/bin/fuck~ (spoiler: ~community/thefuck~)
 
