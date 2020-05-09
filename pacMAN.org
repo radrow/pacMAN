@@ -6,7 +6,7 @@
 
 * Configuration must-have
 
-Add (or uncomment) to your ~/etc/pacman.conf~:
+Add (or uncomment) following lines in your ~/etc/pacman.conf~:
 
 #+BEGIN_SRC
 # For nice colors
